@@ -15,14 +15,16 @@ namespace FitLanches.Dominio.Models
                 new Item
                 {
                     Id = 1,
-                    Descricao = "Hambúrger",
+                    Categoria = Enums.CategoriaItem.Hamburguer,
+                    Descricao = "X-Burger",
                     Status = Enums.StatusItem.Disponivel,
-                    TempoPreparo = 300,
+                    TempoPreparo = 330,
                     Valor = 15
                 },
                 new Item
                 {
                     Id = 2,
+                    Categoria = Enums.CategoriaItem.Bebiba,
                     Descricao = "Suco",
                     Status = Enums.StatusItem.Disponivel,
                     TempoPreparo = 120,

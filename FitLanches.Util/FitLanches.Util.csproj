@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BD7D4FFD-7318-4660-9744-FEF216CE3C1B}</ProjectGuid>
+    <ProjectGuid>{D364C3F1-84BD-486B-A90D-BC6ACA04F3A7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FitLanches.Comum</RootNamespace>
-    <AssemblyName>FitLanches.Comum</AssemblyName>
+    <RootNamespace>FitLanches.Util</RootNamespace>
+    <AssemblyName>FitLanches.Util</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,10 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\ICrud.cs" />
-    <Compile Include="Models\EntidadeDominio.cs" />
+    <Compile Include="Formatadores\DataHora.cs" />
+    <Compile Include="Formatadores\Numeros.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

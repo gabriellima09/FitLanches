@@ -1,0 +1,47 @@
+﻿@model FitLanches.Dominio.Models.Cardapio
+
+@using FitLanches.Util.Formatadores
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Cardápio</h2>
+
+<hr />
+
+<div class="panel panel-default">
+    <div class="form-group">
+        <table class="table table-bordered table-condensed table-hover table-responsive table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        <label class="control-label">Descrição:</label>
+                    </th>
+                    <th>
+                        <label class="control-label">Tempo de Preparo:</label>
+                    </th>
+                    <th>
+                        <label class="control-label">Valor:</label>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Itens)
+                {
+                    <tr>
+                        <td>
+                            <span>@item.Descricao</span>
+                        </td>
+                        <td>
+                            <span>@item.TempoPreparo.ConverteTempo()</span>
+                        </td>
+                        <td>
+                            <span>@item.Valor.ConverterMoeda()</span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
