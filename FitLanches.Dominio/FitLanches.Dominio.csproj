@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Enums\StatusItem.cs" />
     <Compile Include="Enums\StatusPedido.cs" />
+    <Compile Include="Interfaces\IPedido.cs" />
     <Compile Include="Models\Cardapio.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Pedido.cs" />
@@ -54,8 +55,6 @@
       <Name>FitLanches.Comum</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
