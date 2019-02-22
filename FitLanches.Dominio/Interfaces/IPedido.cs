@@ -15,5 +15,6 @@ namespace FitLanches.Dominio.Interfaces
         void RetirarPedido(Pedido pedido);
         void EntregarPedido(Pedido pedido);
         void TrocarStatusPedido(Pedido pedido, StatusPedido status);
+        void ValidarPromocao(ref IList<Item> itens);
     }
 }

@@ -32,6 +32,8 @@ namespace FitLanches.BLL.Models
                 throw new ApplicationException("Ocorreu um erro ao gerar o pedido. A lista de itens estava vazia.");
             }
 
+            ValidarPromocao(ref itens);
+
             Pedido pedido = new Pedido
             {
                 Itens = itens
@@ -62,9 +64,25 @@ namespace FitLanches.BLL.Models
             //salvar novo status no banco
         }
 
+        public void ValidarPromocao(ref IList<Item> itens)
+        {
+            if (itens.Count(x => x.Categoria == CategoriaItem.Hamburguer) >= 2)
+            {
+                itens.Add(new Item
+                {
+                    Id = 0,
+                    Descricao = "Suco Promoção",
+                    Categoria = CategoriaItem.Bebiba,
+                    TempoPreparo = 0,
+                    Status = StatusItem.Disponivel,
+                    Valor = decimal.Zero
+                });
+            }
+        }
+
         private void VerificarPedido(Pedido pedido)
         {
-            if (pedido == null)
+            if (pedido is null)
             {
                 throw new ApplicationException("Não foi possível realizar a operação. O pedido não foi identificado.");
             }
