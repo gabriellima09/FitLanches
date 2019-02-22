@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitLanches.UI", "FitLanches
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitLanches.Util", "FitLanches.Util\FitLanches.Util.csproj", "{D364C3F1-84BD-486B-A90D-BC6ACA04F3A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitLanches.BLL", "FitLanches.BLL\FitLanches.BLL.csproj", "{6E92B336-5D33-4D10-BE97-34D95827F33B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{D364C3F1-84BD-486B-A90D-BC6ACA04F3A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D364C3F1-84BD-486B-A90D-BC6ACA04F3A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D364C3F1-84BD-486B-A90D-BC6ACA04F3A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E92B336-5D33-4D10-BE97-34D95827F33B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E92B336-5D33-4D10-BE97-34D95827F33B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E92B336-5D33-4D10-BE97-34D95827F33B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E92B336-5D33-4D10-BE97-34D95827F33B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
