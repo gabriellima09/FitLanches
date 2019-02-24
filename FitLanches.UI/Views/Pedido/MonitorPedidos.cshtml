@@ -1,0 +1,66 @@
+﻿@model IEnumerable<FitLanches.Dominio.Models.Pedido>
+
+<style>
+    .col-lg-3.col-md-3 {
+        padding: 0;
+    }
+
+    h3.panel-title {
+        font-weight: bold;
+    }
+</style>
+
+<div class="container" style="padding: 0">
+    <div class="col-lg-3 col-md-3 panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Fila de Pedidos</h3>
+        </div>
+        <div class="panel-body">
+            <ul>
+                @foreach (var item in Model.Where(x => x.Status == FitLanches.Dominio.Enums.StatusPedido.PreparoIniciado))
+                {
+                    <li>@item.Id</li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Pedidos em Andamento</h3>
+        </div>
+        <div class="panel-body">
+            <ul>
+                @foreach (var item in Model.Where(x => x.Status == FitLanches.Dominio.Enums.StatusPedido.PreparoFinalizado))
+                {
+                    <li>@item.Id</li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Pedidos Prontos p/ Retirada</h3>
+        </div>
+        <div class="panel-body">
+            <ul>
+                @foreach (var item in Model.Where(x => x.Status == FitLanches.Dominio.Enums.StatusPedido.PedidoProntoRetirada))
+                {
+                    <li>@item.Id</li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">Pedidos Entregues</h3>
+        </div>
+        <div class="panel-body">
+            <ul>
+                @foreach (var item in Model.Where(x => x.Status == FitLanches.Dominio.Enums.StatusPedido.PedidoEntregue))
+                {
+                    <li>@item.Id</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

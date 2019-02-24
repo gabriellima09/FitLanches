@@ -10,38 +10,69 @@
 
 <hr />
 
-<div class="panel panel-default">
-    <div class="form-group">
-        <table class="table table-bordered table-condensed table-hover table-responsive table-striped">
-            <thead>
-                <tr>
-                    <th>
-                        <label class="control-label">Descrição:</label>
-                    </th>
-                    <th>
-                        <label class="control-label">Tempo de Preparo:</label>
-                    </th>
-                    <th>
-                        <label class="control-label">Valor:</label>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Itens)
-                {
+@using (Html.BeginForm("GerarPedido", "Pedido", FormMethod.Post, new { @id = "FormPedido" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <div class="panel panel-default">
+        <div class="form-group">
+            <table class="table table-bordered table-condensed table-hover table-responsive table-striped">
+                <thead>
                     <tr>
-                        <td>
-                            <span>@item.Descricao</span>
-                        </td>
-                        <td>
-                            <span>@item.TempoPreparo.ConverteTempo()</span>
-                        </td>
-                        <td>
-                            <span>@item.Valor.ConverterMoeda()</span>
-                        </td>
+                        <th>
+                            <label class="control-label">Descrição:</label>
+                        </th>
+                        <th>
+                            <label class="control-label">Tempo de Preparo:</label>
+                        </th>
+                        <th>
+                            <label class="control-label">Valor:</label>
+                        </th>
+                        <th>
+                            <label class="control-label">Quantidade:</label>
+                        </th>
+                        <th>
+
+                        </th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Itens.Count; i++)
+                    {
+                        <tr>
+                            @Html.HiddenFor(x => Model.Itens[i].Id)
+                            @Html.HiddenFor(x => Model.Itens[i].Categoria)
+                            @Html.HiddenFor(x => Model.Itens[i].Descricao)
+                            @Html.HiddenFor(x => Model.Itens[i].Status)
+                            @Html.HiddenFor(x => Model.Itens[i].TempoPreparo)
+                            @Html.HiddenFor(x => Model.Itens[i].Valor)
+                            <td>
+                                <span>@Model.Itens[i].Descricao</span>
+                            </td>
+                            <td>
+                                <span>@Model.Itens[i].TempoPreparo.ConverterTempo()</span>
+                            </td>
+                            <td>
+                                <span>@Model.Itens[i].Valor.ConverterMoeda()</span>
+                            </td>
+                            <td>
+                                <span>@Html.TextBoxFor(x => Model.Itens[i].Quantidade, new { @class = "form-control", @type = "number" })</span>
+                            </td>
+                            <td class="text-center">
+                                <span>@Html.CheckBoxFor(x => Model.Itens[i].Selecionado)</span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="5">
+                            <button type="submit" class="btn btn-success" style="float:right">Gerar Pedido</button>
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
-</div>
+}

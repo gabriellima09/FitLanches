@@ -1,0 +1,13 @@
+﻿@model IEnumerable<FitLanches.Dominio.Models.Pedido>
+
+@{
+    ViewBag.Title = "Pedidos";
+}
+
+<h2>Pedidos</h2>
+
+<hr />
+
+<div id="MonitorPedidos">
+    @Html.Action("MonitorPedidos", new { pedidos = Model })
+</div>

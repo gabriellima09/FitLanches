@@ -8,7 +8,7 @@ namespace FitLanches.Util.Formatadores
 {
     public static class DataHora
     {
-        public static string ConverteTempo(this int value)
+        public static string ConverterTempo(this int value)
         {
             int hora = (value / (60 * 60));
             int min = ((value - (hora * 60 * 60)) / 60);

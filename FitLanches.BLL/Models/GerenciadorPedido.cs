@@ -27,7 +27,7 @@ namespace FitLanches.BLL.Models
 
         public void GerarNovoPedido(IList<Item> itens)
         {
-            if (itens == null || itens.Count < 1)
+            if ((itens == null || itens.Count < 1) || itens.Count(x => x.Selecionado) == 0)
             {
                 throw new ApplicationException("Ocorreu um erro ao gerar o pedido. A lista de itens estava vazia.");
             }
@@ -66,7 +66,7 @@ namespace FitLanches.BLL.Models
 
         public void ValidarPromocao(ref IList<Item> itens)
         {
-            if (itens.Count(x => x.Categoria == CategoriaItem.Hamburguer) >= 2)
+            if (itens.Count(x => x.Categoria == CategoriaItem.Hamburguer && x.Quantidade >= 2) > 0)
             {
                 itens.Add(new Item
                 {
