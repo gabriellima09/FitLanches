@@ -4,6 +4,7 @@ using FitLanches.Dominio.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -16,57 +17,7 @@ namespace FitLanches.UI.Controllers
         // GET: Pedido
         public ActionResult Index()
         {
-            IList<Pedido> pedidos = new List<Pedido>
-            {
-                new Pedido
-                {
-                    Id = 1,
-                    Status = StatusPedido.PreparoIniciado,
-                    Itens = new List<Item>
-                    {
-                        new Item
-                        {
-                            Descricao = "item teste"
-                        }
-                    }
-                },
-                new Pedido
-                {
-                    Id = 2,
-                    Status = StatusPedido.PreparoFinalizado,
-                    Itens = new List<Item>
-                    {
-                        new Item
-                        {
-                            Descricao = "item teste"
-                        }
-                    }
-                },
-                new Pedido
-                {
-                    Id = 3,
-                    Status = StatusPedido.PedidoProntoRetirada,
-                    Itens = new List<Item>
-                    {
-                        new Item
-                        {
-                            Descricao = "item teste"
-                        }
-                    }
-                },
-                new Pedido
-                {
-                    Id = 4,
-                    Status = StatusPedido.PedidoEntregue,
-                    Itens = new List<Item>
-                    {
-                        new Item
-                        {
-                            Descricao = "item teste"
-                        }
-                    }
-                }
-            };
+            IList<Pedido> pedidos = gerenciador.SelecionarTodos();
 
             return View(pedidos);
         }
@@ -76,8 +27,15 @@ namespace FitLanches.UI.Controllers
             return PartialView(pedidos);
         }
 
+        public ActionResult GerenciarPedidos(IList<Pedido> pedidos)
+        {
+            IList<Pedido> lista = gerenciador.GerenciarPedidos(pedidos);
+
+            return PartialView("MonitorPedidos", lista);
+        }
+
         [ValidateAntiForgeryToken]
-        public ActionResult GerarPedido(IList<Item> itens)
+        public ActionResult GerarPedido(IList<ItensPedido> itens)
         {
             gerenciador.GerarNovoPedido(itens);
 

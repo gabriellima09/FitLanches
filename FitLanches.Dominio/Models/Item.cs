@@ -12,8 +12,6 @@ namespace FitLanches.Dominio.Models
     {
         public CategoriaItem Categoria { get; set; }
         public string Descricao { get; set; }
-        public int Quantidade { get; set; }
-        public bool Selecionado { get; set; }
         public int TempoPreparo { get; set; }
         public decimal Valor { get; set; }
         public StatusItem Status { get; set; }

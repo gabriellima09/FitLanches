@@ -12,11 +12,13 @@ namespace FitLanches.Dominio.Models
     {
         public Pedido()
         {
-            Itens = new List<Item>();
-            Status = StatusPedido.PreparoIniciado;
+            Itens = new List<ItensPedido>();
         }
 
-        public IList<Item> Itens { get; set; }
+        public IList<ItensPedido> Itens { get; set; }
         public StatusPedido Status { get; set; }
+        public DateTime Data { get; set; }
+        public TimeSpan HoraInicioPreparo { get; set; }
+        public TimeSpan HoraRetirada { get; set; }
     }
 }

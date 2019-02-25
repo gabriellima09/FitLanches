@@ -8,7 +8,8 @@ namespace FitLanches.Dominio.Enums
 {
     public enum StatusPedido
     {
-        PreparoIniciado = 1,
+        NaFila,
+        PreparoIniciado,
         PreparoFinalizado,
         PedidoProntoRetirada,
         PedidoEntregue

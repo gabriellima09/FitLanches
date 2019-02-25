@@ -10,9 +10,9 @@ namespace FitLanches.Dominio.Models
     {
         public Cardapio()
         {
-            Itens = new List<Item>
+            Itens = new List<ItensPedido>
             {
-                new Item
+                new ItensPedido
                 {
                     Id = 1,
                     Categoria = Enums.CategoriaItem.Hamburguer,
@@ -21,7 +21,7 @@ namespace FitLanches.Dominio.Models
                     TempoPreparo = 330,
                     Valor = 15
                 },
-                new Item
+                new ItensPedido
                 {
                     Id = 2,
                     Categoria = Enums.CategoriaItem.Bebiba,
@@ -33,6 +33,6 @@ namespace FitLanches.Dominio.Models
             };
         }
 
-        public IList<Item> Itens;
+        public IList<ItensPedido> Itens;
     }
 }

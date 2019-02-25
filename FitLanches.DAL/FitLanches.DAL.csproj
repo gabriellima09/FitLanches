@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6E92B336-5D33-4D10-BE97-34D95827F33B}</ProjectGuid>
+    <ProjectGuid>{2E9BEB37-5C0E-4F0C-8B01-B42EAD2CF7C5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FitLanches.BLL</RootNamespace>
-    <AssemblyName>FitLanches.BLL</AssemblyName>
+    <RootNamespace>FitLanches.DAL</RootNamespace>
+    <AssemblyName>FitLanches.DAL</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -31,7 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,21 +48,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\GerenciadorPedido.cs" />
+    <Compile Include="Context\FitLanchesContext.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FitLanches.Comum\FitLanches.Comum.csproj">
-      <Project>{BD7D4FFD-7318-4660-9744-FEF216CE3C1B}</Project>
-      <Name>FitLanches.Comum</Name>
-    </ProjectReference>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
     <ProjectReference Include="..\FitLanches.Dominio\FitLanches.Dominio.csproj">
       <Project>{53A790FE-C03D-4273-A6AD-C1C99641F4F4}</Project>
       <Name>FitLanches.Dominio</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FitLanches.Repositorio\FitLanches.Repositorio.csproj">
-      <Project>{2A71DD8C-1B8C-477E-B19B-E2D88FF51028}</Project>
-      <Name>FitLanches.Repositorio</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

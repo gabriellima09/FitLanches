@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<FitLanches.Dominio.Models.Pedido>
 
+@using Newtonsoft.Json;
+
 <style>
     .col-lg-3.col-md-3 {
         padding: 0;
@@ -10,57 +12,95 @@
     }
 </style>
 
-<div class="container" style="padding: 0">
-    <div class="col-lg-3 col-md-3 panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Fila de Pedidos</h3>
-        </div>
-        <div class="panel-body">
-            <ul>
-                @foreach (var item in Model.Where(x => x.Status == FitLanches.Dominio.Enums.StatusPedido.PreparoIniciado))
-                {
-                    <li>@item.Id</li>
-                }
-            </ul>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-3 panel panel-primary">
-        <div class="panel-heading">
-            <h3 class="panel-title">Pedidos em Andamento</h3>
-        </div>
-        <div class="panel-body">
-            <ul>
-                @foreach (var item in Model.Where(x => x.Status == FitLanches.Dominio.Enums.StatusPedido.PreparoFinalizado))
-                {
-                    <li>@item.Id</li>
-                }
-            </ul>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-3 panel panel-info">
-        <div class="panel-heading">
-            <h3 class="panel-title">Pedidos Prontos p/ Retirada</h3>
-        </div>
-        <div class="panel-body">
-            <ul>
-                @foreach (var item in Model.Where(x => x.Status == FitLanches.Dominio.Enums.StatusPedido.PedidoProntoRetirada))
-                {
-                    <li>@item.Id</li>
-                }
-            </ul>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-3 panel panel-success">
-        <div class="panel-heading">
-            <h3 class="panel-title">Pedidos Entregues</h3>
-        </div>
-        <div class="panel-body">
-            <ul>
-                @foreach (var item in Model.Where(x => x.Status == FitLanches.Dominio.Enums.StatusPedido.PedidoEntregue))
-                {
-                    <li>@item.Id</li>
-                }
-            </ul>
-        </div>
-    </div>
+@using (Html.BeginForm("GerenciarPedidos", "Pedido", FormMethod.Post, new { @id = "FormPedido" }))
+{
+<div id="divHidden">
+    @for (int i = 0; i < Model.Count(); i++)
+    {
+        <input type="hidden" name="pedidos[@i].Id" value="@Model.ElementAt(i).Id" />
+        <input type="hidden" name="pedidos[@i].HoraInicioPreparo" value="@Model.ElementAt(i).HoraInicioPreparo" />
+        <input type="hidden" name="pedidos[@i].Status" value="@Model.ElementAt(i).Status" />
+
+        for (int j = 0; j < Model.ElementAt(i).Itens.Count; j++)
+        {
+            <input type="hidden" name="pedidos[@i].Itens[@j].Id" value="@Model.ElementAt(i).Itens.ElementAt(j).Id" />
+            <input type="hidden" name="pedidos[@i].Itens[@j].TempoPreparo" value="@Model.ElementAt(i).Itens.ElementAt(j).TempoPreparo" />
+        }
+    }
 </div>
+
+    <div class="container" style="padding: 0">
+        <div class="col-lg-3 col-md-3 panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Fila de Pedidos</h3>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    @{
+                        var listaFila = Model.Where(x => x.Status == FitLanches.Dominio.Enums.StatusPedido.NaFila).ToList();
+                        for (int i = 0; i < listaFila.Count(); i++)
+                        {
+                            <li>
+                                <span>Pedido @listaFila[i].Id</span>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Pedidos em Andamento</h3>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    @{
+                        var listaIniciado = Model.Where(x => x.Status == FitLanches.Dominio.Enums.StatusPedido.PreparoIniciado).ToList();
+                        for (int i = 0; i < listaIniciado.Count(); i++)
+                        {
+                            <li>
+                                <span>Pedido @listaIniciado[i].Id</span>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Pedidos Prontos p/ Retirada</h3>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    @{
+                        var listaProntoRetirada = Model.Where(x => x.Status == FitLanches.Dominio.Enums.StatusPedido.PedidoProntoRetirada).ToList();
+                        for (int i = 0; i < listaProntoRetirada.Count(); i++)
+                        {
+                            <li>
+                                <span>Pedido @listaProntoRetirada[i].Id</span>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">Pedidos Entregues</h3>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    @{
+                        var listaEntregue = Model.Where(x => x.Status == FitLanches.Dominio.Enums.StatusPedido.PedidoEntregue).ToList();
+                        for (int i = 0; i < listaEntregue.Count(); i++)
+                        {
+                            <li>
+                                <span>Pedido @listaEntregue[i].Id</span>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+}

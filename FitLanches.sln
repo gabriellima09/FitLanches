@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitLanches.Util", "FitLanch
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitLanches.BLL", "FitLanches.BLL\FitLanches.BLL.csproj", "{6E92B336-5D33-4D10-BE97-34D95827F33B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitLanches.DAL", "FitLanches.DAL\FitLanches.DAL.csproj", "{2E9BEB37-5C0E-4F0C-8B01-B42EAD2CF7C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitLanches.Repositorio", "FitLanches.Repositorio\FitLanches.Repositorio.csproj", "{2A71DD8C-1B8C-477E-B19B-E2D88FF51028}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{6E92B336-5D33-4D10-BE97-34D95827F33B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E92B336-5D33-4D10-BE97-34D95827F33B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E92B336-5D33-4D10-BE97-34D95827F33B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E9BEB37-5C0E-4F0C-8B01-B42EAD2CF7C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E9BEB37-5C0E-4F0C-8B01-B42EAD2CF7C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E9BEB37-5C0E-4F0C-8B01-B42EAD2CF7C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E9BEB37-5C0E-4F0C-8B01-B42EAD2CF7C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A71DD8C-1B8C-477E-B19B-E2D88FF51028}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A71DD8C-1B8C-477E-B19B-E2D88FF51028}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A71DD8C-1B8C-477E-B19B-E2D88FF51028}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A71DD8C-1B8C-477E-B19B-E2D88FF51028}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

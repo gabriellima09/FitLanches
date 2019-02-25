@@ -10,7 +10,7 @@ namespace FitLanches.Comum.Interfaces
     {
         void Inserir(T entidade);
         void Alterar(T entidade);
-        void Excluir(int? id);
+        void Excluir(int id);
         IList<T> SelecionarTodos();
         T SelecionarPorId(int id);
     }

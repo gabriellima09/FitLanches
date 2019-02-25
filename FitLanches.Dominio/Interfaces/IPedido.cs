@@ -10,11 +10,14 @@ namespace FitLanches.Dominio.Interfaces
 {
     public interface IPedido
     {
-        void GerarNovoPedido(IList<Item> itens);
+        void GerarNovoPedido(IList<ItensPedido> itens);
         void FinalizarPreparoPedido(Pedido pedido);
         void RetirarPedido(Pedido pedido);
         void EntregarPedido(Pedido pedido);
         void TrocarStatusPedido(Pedido pedido, StatusPedido status);
-        void ValidarPromocao(ref IList<Item> itens);
+        void ValidarPromocao(ref IList<ItensPedido> itens);
+        IList<Pedido> SelecionarTodos();
+        Pedido SelecionarPorId(int id);
+        IList<Pedido> GerenciarPedidos(IList<Pedido> pedidos);
     }
 }
