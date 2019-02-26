@@ -14,11 +14,29 @@
 
 @section Scripts{
     <script type="text/javascript">
-        setInterval(() => GerenciarPedidos(), 5000);
+        $(document).ready(function () {
+            $(document).on('click', ".btnRetirar", function () {
+                //console.log('click')
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("PedidoEntregue", "Pedido")',
+                    data: { 'Id': $(this).attr('data-id') },
+                    dataType: 'html',
+                    async: true,
+                    beforeSend: function () {
+                    },
+                    success: function (response) {
+                        //console.log(response);
+                        $("#MonitorPedidos").html(response);
+                    }
+                });
+            });
+        });
+
+        setInterval(() => GerenciarPedidos(), 1000);
 
         function GerenciarPedidos() {
-            console.log('disparou')
-
+            //console.log('disparou')
             $.ajax({
                 type: "POST",
                 url: '@Url.Action("GerenciarPedidos", "Pedido")',
@@ -28,7 +46,6 @@
                 },
                 success: function (response) {
                     //console.log(response);
-
                     $("#MonitorPedidos").html(response);
                 }
             });

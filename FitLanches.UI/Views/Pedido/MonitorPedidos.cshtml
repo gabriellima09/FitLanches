@@ -98,7 +98,7 @@
                             {
                                 <li class="list-group-item">
                                     <span>Pedido @listaProntoRetirada[i].Id</span>
-                                    @Html.ActionLink("Retirar", "PedidoEntregue", new { listaProntoRetirada[i].Id }, new { @class = "btn btn-xs btn-success", @style = "float: right" })
+                                    <button class="btnRetirar btn btn-xs btn-success" style="float: right;" type="button" data-id="@listaProntoRetirada[i].Id">Retirar</button>
                                 </li>
                             }
                         }

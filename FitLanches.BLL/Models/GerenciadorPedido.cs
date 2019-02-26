@@ -40,7 +40,8 @@ namespace FitLanches.BLL.Models
             Pedido pedido = new Pedido
             {
                 Itens = itens,
-                Status = StatusPedido.NaFila
+                Status = StatusPedido.NaFila,
+                Data = DateTime.Now
             };
 
             repositorio.Inserir(pedido);

@@ -18,7 +18,7 @@ namespace FitLanches.Dominio.Models
                     Categoria = Enums.CategoriaItem.Hamburguer,
                     Descricao = "X-Burger",
                     Status = Enums.StatusItem.Disponivel,
-                    TempoPreparo = 330,
+                    TempoPreparo = 60,
                     Valor = 15
                 },
                 new ItensPedido
@@ -27,7 +27,7 @@ namespace FitLanches.Dominio.Models
                     Categoria = Enums.CategoriaItem.Bebiba,
                     Descricao = "Suco",
                     Status = Enums.StatusItem.Disponivel,
-                    TempoPreparo = 120,
+                    TempoPreparo = 12,
                     Valor = 5
                 }
             };
