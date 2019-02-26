@@ -11,3 +11,26 @@
 <div id="MonitorPedidos">
     @Html.Action("MonitorPedidos", new { pedidos = Model })
 </div>
+
+@section Scripts{
+    <script type="text/javascript">
+        setInterval(() => GerenciarPedidos(), 5000);
+
+        function GerenciarPedidos() {
+            console.log('disparou')
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GerenciarPedidos", "Pedido")',
+                data: $("#FormPedido").serialize(),
+                dataType: 'html',
+                beforeSend: function () {
+                },
+                success: function (response) {
+                    //console.log(response);
+                    $("#MonitorPedidos").html(response);
+                }
+            });
+        }
+    </script>
+}

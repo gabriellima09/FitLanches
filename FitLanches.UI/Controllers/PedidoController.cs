@@ -24,9 +24,15 @@ namespace FitLanches.UI.Controllers
 
         public ActionResult MonitorPedidos(IList<Pedido> pedidos)
         {
+            if (pedidos is null || pedidos.Count == 0)
+            {
+                pedidos = gerenciador.SelecionarTodos();
+            }
+
             return PartialView(pedidos);
         }
 
+        [HttpPost]
         public ActionResult GerenciarPedidos(IList<Pedido> pedidos)
         {
             IList<Pedido> lista = gerenciador.GerenciarPedidos(pedidos);

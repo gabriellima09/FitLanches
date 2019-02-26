@@ -7,6 +7,7 @@
         padding: 0;
     }
 
+    span,
     h3.panel-title {
         font-weight: bold;
     }
@@ -14,35 +15,43 @@
 
 @using (Html.BeginForm("GerenciarPedidos", "Pedido", FormMethod.Post, new { @id = "FormPedido" }))
 {
-<div id="divHidden">
-    @for (int i = 0; i < Model.Count(); i++)
-    {
-        <input type="hidden" name="pedidos[@i].Id" value="@Model.ElementAt(i).Id" />
-        <input type="hidden" name="pedidos[@i].HoraInicioPreparo" value="@Model.ElementAt(i).HoraInicioPreparo" />
-        <input type="hidden" name="pedidos[@i].Status" value="@Model.ElementAt(i).Status" />
-
-        for (int j = 0; j < Model.ElementAt(i).Itens.Count; j++)
+    <div id="divHidden">
+        @for (int i = 0; i < Model.Count(); i++)
         {
-            <input type="hidden" name="pedidos[@i].Itens[@j].Id" value="@Model.ElementAt(i).Itens.ElementAt(j).Id" />
-            <input type="hidden" name="pedidos[@i].Itens[@j].TempoPreparo" value="@Model.ElementAt(i).Itens.ElementAt(j).TempoPreparo" />
-        }
-    }
-</div>
+            <input type="hidden" name="pedidos[@i].Id" value="@Model.ElementAt(i).Id" />
+            <input type="hidden" name="pedidos[@i].HoraInicioPreparo" value="@Model.ElementAt(i).HoraInicioPreparo" />
+            <input type="hidden" name="pedidos[@i].Status" value="@Model.ElementAt(i).Status" />
 
-    <div class="container" style="padding: 0">
+            for (int j = 0; j < Model.ElementAt(i).Itens.Count; j++)
+            {
+                <input type="hidden" name="pedidos[@i].Itens[@j].Id" value="@Model.ElementAt(i).Itens.ElementAt(j).Id" />
+                <input type="hidden" name="pedidos[@i].Itens[@j].TempoPreparo" value="@Model.ElementAt(i).Itens.ElementAt(j).TempoPreparo" />
+            }
+        }
+    </div>
+
+    <div class="container" style="padding: 0;display: flex;">
         <div class="col-lg-3 col-md-3 panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Fila de Pedidos</h3>
             </div>
             <div class="panel-body">
-                <ul>
+                <ul class="list-group">
                     @{
                         var listaFila = Model.Where(x => x.Status == FitLanches.Dominio.Enums.StatusPedido.NaFila).ToList();
-                        for (int i = 0; i < listaFila.Count(); i++)
+
+                        if (listaFila.Count > 0)
                         {
-                            <li>
-                                <span>Pedido @listaFila[i].Id</span>
-                            </li>
+                            for (int i = 0; i < listaFila.Count(); i++)
+                            {
+                                <li class="list-group-item">
+                                    <span>Pedido @listaFila[i].Id</span>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li class="list-group-item">Sem Pedidos na Fila ...</li>
                         }
                     }
                 </ul>
@@ -53,14 +62,22 @@
                 <h3 class="panel-title">Pedidos em Andamento</h3>
             </div>
             <div class="panel-body">
-                <ul>
+                <ul class="list-group">
                     @{
                         var listaIniciado = Model.Where(x => x.Status == FitLanches.Dominio.Enums.StatusPedido.PreparoIniciado).ToList();
-                        for (int i = 0; i < listaIniciado.Count(); i++)
+
+                        if (listaIniciado.Count > 0)
                         {
-                            <li>
-                                <span>Pedido @listaIniciado[i].Id</span>
-                            </li>
+                            for (int i = 0; i < listaIniciado.Count(); i++)
+                            {
+                                <li class="list-group-item">
+                                    <span>Pedido @listaIniciado[i].Id</span>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li class="list-group-item">Sem Pedidos em Andamento ...</li>
                         }
                     }
                 </ul>
@@ -71,14 +88,23 @@
                 <h3 class="panel-title">Pedidos Prontos p/ Retirada</h3>
             </div>
             <div class="panel-body">
-                <ul>
+                <ul class="list-group">
                     @{
                         var listaProntoRetirada = Model.Where(x => x.Status == FitLanches.Dominio.Enums.StatusPedido.PedidoProntoRetirada).ToList();
-                        for (int i = 0; i < listaProntoRetirada.Count(); i++)
+
+                        if (listaProntoRetirada.Count > 0)
                         {
-                            <li>
-                                <span>Pedido @listaProntoRetirada[i].Id</span>
-                            </li>
+                            for (int i = 0; i < listaProntoRetirada.Count(); i++)
+                            {
+                                <li class="list-group-item">
+                                    <span>Pedido @listaProntoRetirada[i].Id</span>
+                                    @Html.ActionLink("Retirar", "PedidoEntregue", new { listaProntoRetirada[i].Id }, new { @class = "btn btn-xs btn-success", @style = "float: right" })
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li class="list-group-item">Sem Pedidos p/ Retirar ...</li>
                         }
                     }
                 </ul>
@@ -89,14 +115,22 @@
                 <h3 class="panel-title">Pedidos Entregues</h3>
             </div>
             <div class="panel-body">
-                <ul>
+                <ul class="list-group">
                     @{
                         var listaEntregue = Model.Where(x => x.Status == FitLanches.Dominio.Enums.StatusPedido.PedidoEntregue).ToList();
-                        for (int i = 0; i < listaEntregue.Count(); i++)
+
+                        if (listaEntregue.Count > 0)
                         {
-                            <li>
-                                <span>Pedido @listaEntregue[i].Id</span>
-                            </li>
+                            for (int i = 0; i < listaEntregue.Count(); i++)
+                            {
+                                <li class="list-group-item">
+                                    <span>Pedido @listaEntregue[i].Id</span>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li class="list-group-item">Sem Pedidos Entregues ...</li>
                         }
                     }
                 </ul>
