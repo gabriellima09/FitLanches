@@ -57,10 +57,10 @@
                             <span>@Model.Itens[i].Valor.ConverterMoeda()</span>
                         </td>
                         <td>
-                            <span>@Html.TextBoxFor(x => Model.Itens[i].Quantidade, new { @class = "form-control", @type = "number" })</span>
+                            <span>@Html.TextBoxFor(x => Model.Itens[i].Quantidade, new { @class = "form-control btnQuantidade", @type = "number", @min = "0", @data_id= Model.Itens[i].Id })</span>
                         </td>
                         <td class="text-center">
-                            <span>@Html.CheckBoxFor(x => Model.Itens[i].Selecionado)</span>
+                            <span>@Html.CheckBoxFor(x => Model.Itens[i].Selecionado, new { @disabled=true, @data_id = Model.Itens[i].Id })</span>
                         </td>
                     </tr>
                     }
@@ -68,11 +68,39 @@
                 <tfoot>
                     <tr>
                         <th colspan="5">
-                            <button type="submit" class="btn btn-success" style="float:right">Gerar Pedido</button>
+                            <button id="btnGerarPedido" disabled type="submit" class="btn btn-success" style="float:right">Gerar Pedido</button>
                         </th>
                     </tr>
                 </tfoot>
             </table>
         </div>
     </div>
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('input[type="checkbox"]').on('input', function () {
+                if ($('input[type="checkbox"]:checked').length > 0) {
+                    $('#btnGerarPedido').attr('disabled', false);
+                } else {
+                    $('#btnGerarPedido').prop('disabled', true);
+                }
+            });
+
+            $(".btnQuantidade").on('input', function () {
+                var _this = $(this);
+                var val = _this.val();
+                var dataId = _this.attr('data-id');
+
+                if (val > 0) {
+                    $('input[type="checkbox"][data-id="' + dataId + '"]').removeAttr('disabled');
+                } else {
+                    $('input[type="checkbox"][data-id="' + dataId + '"]').attr('disabled', true).prop('checked', false);
+                }   
+
+                $('input[type="checkbox"][data-id="' + dataId + '"]').trigger('input');
+            }); 
+        });
+    </script>
 }

@@ -40,6 +40,7 @@ namespace FitLanches.UI.Controllers
             return PartialView("MonitorPedidos", lista);
         }
 
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GerarPedido(IList<ItensPedido> itens)
         {
@@ -48,13 +49,7 @@ namespace FitLanches.UI.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult PreparoFinalizado(Pedido pedido)
-        {
-            gerenciador.FinalizarPreparoPedido(pedido);
-
-            return RedirectToAction("MonitorPedidos");
-        }
-
+        [HttpPost]
         public ActionResult PedidoProntoRetirada(Pedido pedido)
         {
             gerenciador.RetirarPedido(pedido);
@@ -62,6 +57,7 @@ namespace FitLanches.UI.Controllers
             return RedirectToAction("MonitorPedidos");
         }
 
+        [HttpPost]
         public ActionResult PedidoEntregue(Pedido pedido)
         {
             gerenciador.EntregarPedido(pedido);

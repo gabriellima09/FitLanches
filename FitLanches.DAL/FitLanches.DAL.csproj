@@ -56,7 +56,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\FitLanches.Dominio\FitLanches.Dominio.csproj">
       <Project>{53A790FE-C03D-4273-A6AD-C1C99641F4F4}</Project>

@@ -201,7 +201,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FitLanches.BLL\FitLanches.BLL.csproj">
-      <Project>{6E92B336-5D33-4D10-BE97-34D95827F33B}</Project>
+      <Project>{6e92b336-5d33-4d10-be97-34d95827f33b}</Project>
       <Name>FitLanches.BLL</Name>
     </ProjectReference>
     <ProjectReference Include="..\FitLanches.Comum\FitLanches.Comum.csproj">

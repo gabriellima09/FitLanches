@@ -2,6 +2,7 @@
 using FitLanches.Dominio.Interfaces;
 using FitLanches.Dominio.Models;
 using FitLanches.Repositorio.Models;
+using FitLanches.Util.Formatadores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,13 +22,6 @@ namespace FitLanches.BLL.Models
             TrocarStatusPedido(pedido, StatusPedido.PedidoEntregue);
         }
 
-        public void FinalizarPreparoPedido(Pedido pedido)
-        {
-            VerificarPedido(pedido);
-
-            TrocarStatusPedido(pedido, StatusPedido.PreparoFinalizado);
-        }
-
         public void GerarNovoPedido(IList<ItensPedido> itens)
         {
             if ((itens == null || itens.Count < 1) || itens.Count(x => x.Selecionado) == 0)
@@ -39,16 +33,12 @@ namespace FitLanches.BLL.Models
 
             Pedido pedido = new Pedido
             {
-                Itens = itens,
+                Itens = itens.Where(x => x.Selecionado == true).ToList(),
                 Status = StatusPedido.NaFila,
                 Data = DateTime.Now
             };
 
             repositorio.Inserir(pedido);
-
-            //retornar tempo de espera até a retirada
-
-            //TODO: verificar como armazenar/exibir o tempo na tela
         }
 
         public void RetirarPedido(Pedido pedido)
@@ -72,9 +62,14 @@ namespace FitLanches.BLL.Models
         {
             var tempPedido = SelecionarPorId(pedido.Id);
 
-            if (status == StatusPedido.PreparoIniciado)
+            switch (status)
             {
-                tempPedido.HoraInicioPreparo = DateTime.Now.TimeOfDay;
+                case StatusPedido.PreparoIniciado:
+                    tempPedido.HoraInicioPreparo = DateTime.Now.TimeOfDay;
+                    break;
+                case StatusPedido.PedidoEntregue:
+                    tempPedido.HoraRetirada = DateTime.Now.TimeOfDay;
+                    break;
             }
 
             tempPedido.Status = status;
@@ -108,20 +103,16 @@ namespace FitLanches.BLL.Models
 
         public IList<Pedido> GerenciarPedidos(IList<Pedido> pedidos)
         {
-            if (pedidos.Count(x => x.Status == StatusPedido.PreparoIniciado) < 2 && pedidos.Count(x => x.Status == StatusPedido.NaFila) > 0)
+            while (pedidos.Count(x => x.Status == StatusPedido.NaFila) > 0 && pedidos.Count(x => x.Status == StatusPedido.PreparoIniciado) < 2)
             {
-                do
-                {
-                    Pedido pedido = pedidos
-                        .Where(x => x.Status == StatusPedido.NaFila)
-                        .OrderBy(y => y.Id)
-                        .First();
+                Pedido pedido = pedidos
+                    .Where(x => x.Status == StatusPedido.NaFila)
+                    .OrderBy(y => y.Id)
+                    .First();
 
-                    TrocarStatusPedido(pedido, StatusPedido.PreparoIniciado);
+                TrocarStatusPedido(pedido, StatusPedido.PreparoIniciado);
 
-                    pedidos = repositorio.SelecionarTodos();
-
-                } while (pedidos.Count(x => x.Status == StatusPedido.NaFila) > 0 && pedidos.Count(x => x.Status == StatusPedido.PreparoIniciado) < 2);
+                pedidos = repositorio.SelecionarTodos();
             }
 
             foreach (var pedido in pedidos.Where(x => x.Status == StatusPedido.PreparoIniciado))
@@ -140,6 +131,17 @@ namespace FitLanches.BLL.Models
             TimeSpan total = TimeSpan.FromSeconds(itens.Sum(x => x.TempoPreparo));
 
             return horaInicio.Add(total) < DateTime.Now.TimeOfDay;
+        }
+
+        public static string VerificarTempoPedido(TimeSpan horaInicio, IList<ItensPedido> itens)
+        {
+            TimeSpan total = TimeSpan.FromSeconds(itens.Sum(x => x.TempoPreparo));
+            TimeSpan finalizado = horaInicio.Add(total);
+            TimeSpan agora = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+
+            horaInicio.Add(total).Subtract(DateTime.Now.TimeOfDay);
+
+            return Convert.ToInt32(finalizado.Subtract(agora).TotalSeconds).ConverterTempo();
         }
     }
 }

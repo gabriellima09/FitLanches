@@ -7,6 +7,10 @@
 <h2>Pedidos</h2>
 
 <hr />
+<div class="btn-group">
+    <a href="/Cardapio/" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Novo Pedido</a>
+</div>
+<hr />
 
 <div id="MonitorPedidos">
     @Html.Action("MonitorPedidos", new { pedidos = Model })

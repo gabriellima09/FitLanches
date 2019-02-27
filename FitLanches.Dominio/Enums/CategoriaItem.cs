@@ -9,6 +9,8 @@ namespace FitLanches.Dominio.Enums
     public enum CategoriaItem
     {
         Hamburguer = 1,
-        Bebiba
+        Bebiba,
+        Sobremesa,
+        Salgado
     }
 }

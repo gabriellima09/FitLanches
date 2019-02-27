@@ -10,7 +10,6 @@ namespace FitLanches.Dominio.Enums
     {
         NaFila,
         PreparoIniciado,
-        PreparoFinalizado,
         PedidoProntoRetirada,
         PedidoEntregue
     }

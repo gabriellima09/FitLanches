@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<FitLanches.Dominio.Models.Pedido>
 
-@using Newtonsoft.Json;
+@using FitLanches.BLL.Models;
+@using FitLanches.Util.Formatadores;
 
 <style>
     .col-lg-3.col-md-3 {
@@ -46,6 +47,7 @@
                             {
                                 <li class="list-group-item">
                                     <span>Pedido @listaFila[i].Id</span>
+                                    <span class="badge" style="float:right">na fila</span>
                                 </li>
                             }
                         }
@@ -72,6 +74,7 @@
                             {
                                 <li class="list-group-item">
                                     <span>Pedido @listaIniciado[i].Id</span>
+                                    <span class="badge alert-info">@GerenciadorPedido.VerificarTempoPedido(listaIniciado[i].HoraInicioPreparo, listaIniciado[i].Itens)</span>
                                 </li>
                             }
                         }
@@ -98,7 +101,7 @@
                             {
                                 <li class="list-group-item">
                                     <span>Pedido @listaProntoRetirada[i].Id</span>
-                                    <button class="btnRetirar btn btn-xs btn-success" style="float: right;" type="button" data-id="@listaProntoRetirada[i].Id">Retirar</button>
+                                    <button class="btnRetirar badge btn-xs alert-success" style="float: right;" type="button" data-id="@listaProntoRetirada[i].Id">Retirar&nbsp;<span class="glyphicon glyphicon-log-in" /></button>
                                 </li>
                             }
                         }
@@ -125,6 +128,7 @@
                             {
                                 <li class="list-group-item">
                                     <span>Pedido @listaEntregue[i].Id</span>
+                                    <span class="alert-success badge" style="float:right">@listaEntregue[i].Itens.Sum(x => x.Valor).ConverterMoeda() - entregue&nbsp;<span class="glyphicon glyphicon-ok-circle" /></span>
                                 </li>
                             }
                         }

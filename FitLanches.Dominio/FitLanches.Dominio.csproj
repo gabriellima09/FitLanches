@@ -47,7 +47,6 @@
     <Compile Include="Enums\StatusPedido.cs" />
     <Compile Include="Interfaces\IPedido.cs" />
     <Compile Include="Models\Cardapio.cs" />
-    <Compile Include="Models\Item.cs" />
     <Compile Include="Models\ItensPedido.cs" />
     <Compile Include="Models\Pedido.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

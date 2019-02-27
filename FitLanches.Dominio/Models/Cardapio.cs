@@ -19,15 +19,42 @@ namespace FitLanches.Dominio.Models
                     Descricao = "X-Burger",
                     Status = Enums.StatusItem.Disponivel,
                     TempoPreparo = 60,
-                    Valor = 15
+                    Valor = 10
                 },
                 new ItensPedido
                 {
                     Id = 2,
                     Categoria = Enums.CategoriaItem.Bebiba,
-                    Descricao = "Suco",
+                    Descricao = "Suco Natural",
                     Status = Enums.StatusItem.Disponivel,
-                    TempoPreparo = 12,
+                    TempoPreparo = 40,
+                    Valor = 5.50M
+                },
+                new ItensPedido
+                {
+                    Id = 3,
+                    Categoria = Enums.CategoriaItem.Sobremesa,
+                    Descricao = "Sorvete de Pote",
+                    Status = Enums.StatusItem.Disponivel,
+                    TempoPreparo = 10,
+                    Valor = 8.50M
+                },
+                new ItensPedido
+                {
+                    Id = 4,
+                    Categoria = Enums.CategoriaItem.Hamburguer,
+                    Descricao = "X-Tudo",
+                    Status = Enums.StatusItem.Disponivel,
+                    TempoPreparo = 90,
+                    Valor = 12.75M
+                },
+                new ItensPedido
+                {
+                    Id = 5,
+                    Categoria = Enums.CategoriaItem.Salgado,
+                    Descricao = "Coxinha de Frango",
+                    Status = Enums.StatusItem.Disponivel,
+                    TempoPreparo = 15,
                     Valor = 5
                 }
             };

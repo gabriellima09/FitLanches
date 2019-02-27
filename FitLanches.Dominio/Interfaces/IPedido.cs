@@ -11,7 +11,6 @@ namespace FitLanches.Dominio.Interfaces
     public interface IPedido
     {
         void GerarNovoPedido(IList<ItensPedido> itens);
-        void FinalizarPreparoPedido(Pedido pedido);
         void RetirarPedido(Pedido pedido);
         void EntregarPedido(Pedido pedido);
         void TrocarStatusPedido(Pedido pedido, StatusPedido status);

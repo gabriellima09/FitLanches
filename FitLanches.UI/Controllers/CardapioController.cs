@@ -12,9 +12,7 @@ namespace FitLanches.UI.Controllers
         // GET: Cardapio
         public ActionResult Index()
         {
-            Cardapio cardapio = new Cardapio();
-
-            return View(cardapio);
+            return View(new Cardapio());
         }
     }
 }

@@ -57,6 +57,10 @@
       <Project>{2A71DD8C-1B8C-477E-B19B-E2D88FF51028}</Project>
       <Name>FitLanches.Repositorio</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FitLanches.Util\FitLanches.Util.csproj">
+      <Project>{D364C3F1-84BD-486B-A90D-BC6ACA04F3A7}</Project>
+      <Name>FitLanches.Util</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
