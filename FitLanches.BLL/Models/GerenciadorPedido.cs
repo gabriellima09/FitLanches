@@ -13,7 +13,7 @@ namespace FitLanches.BLL.Models
 {
     public class GerenciadorPedido : IPedido
     {
-        private RepositorioPedido repositorio = new RepositorioPedido();
+        private readonly RepositorioPedido repositorio = new RepositorioPedido();
 
         public void EntregarPedido(Pedido pedido)
         {
@@ -33,7 +33,7 @@ namespace FitLanches.BLL.Models
 
             Pedido pedido = new Pedido
             {
-                Itens = itens.Where(x => x.Selecionado == true).ToList(),
+                Itens = itens.Where(x => x.Selecionado).ToList(),
                 Status = StatusPedido.NaFila,
                 Data = DateTime.Now
             };
@@ -79,7 +79,8 @@ namespace FitLanches.BLL.Models
 
         public void ValidarPromocao(ref IList<ItensPedido> itens)
         {
-            if (itens.Count(x => x.Categoria == CategoriaItem.Hamburguer && x.Quantidade >= 2) > 0)
+            if (itens.Count(x => x.Categoria == CategoriaItem.Hamburguer && x.Selecionado) >= 2
+                || itens.Any(x => x.Categoria == CategoriaItem.Hamburguer && x.Quantidade >= 2))
             {
                 itens.Add(new ItensPedido
                 {
@@ -88,7 +89,8 @@ namespace FitLanches.BLL.Models
                     Categoria = CategoriaItem.Bebiba,
                     TempoPreparo = 0,
                     Status = StatusItem.Disponivel,
-                    Valor = decimal.Zero
+                    Valor = decimal.Zero,
+                    Selecionado = true
                 });
             }
         }
@@ -103,7 +105,7 @@ namespace FitLanches.BLL.Models
 
         public IList<Pedido> GerenciarPedidos(IList<Pedido> pedidos)
         {
-            while (pedidos.Count(x => x.Status == StatusPedido.NaFila) > 0 && pedidos.Count(x => x.Status == StatusPedido.PreparoIniciado) < 2)
+            while (pedidos.Any(x => x.Status == StatusPedido.NaFila) && pedidos.Count(x => x.Status == StatusPedido.PreparoIniciado) < 2)
             {
                 Pedido pedido = pedidos
                     .Where(x => x.Status == StatusPedido.NaFila)

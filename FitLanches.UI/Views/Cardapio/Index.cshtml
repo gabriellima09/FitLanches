@@ -94,7 +94,7 @@
                 var dataId = _this.attr('data-id');
 
                 if (val > 0) {
-                    $('input[type="checkbox"][data-id="' + dataId + '"]').removeAttr('disabled');
+                    $('input[type="checkbox"][data-id="' + dataId + '"]').removeAttr('disabled').prop('checked', true);
                 } else {
                     $('input[type="checkbox"][data-id="' + dataId + '"]').attr('disabled', true).prop('checked', false);
                 }   

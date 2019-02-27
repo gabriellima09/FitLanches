@@ -12,7 +12,7 @@ namespace FitLanches.UI.Controllers
 {
     public class PedidoController : Controller
     {
-        private GerenciadorPedido gerenciador = new GerenciadorPedido();
+        private readonly GerenciadorPedido gerenciador = new GerenciadorPedido();
 
         // GET: Pedido
         public ActionResult Index()
